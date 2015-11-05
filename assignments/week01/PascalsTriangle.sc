@@ -46,7 +46,6 @@ object PascalsTriangle {
     * @param s The line to start from
     * @param d The depth of the Pascal's triangle (number of lines to
     *          render)
-    * @param c Current line
     * @return A string representation of the Pascal's triangle
     */
   def renderPascalsTriangle(s: Int, d: Int): String = {
