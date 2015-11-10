@@ -1,5 +1,5 @@
 /** Implementation of algorithms that verify the balancing of parentheses in
-  * a string. THe string is represented as a list of characters (List[Char]).
+  * a string. The string is represented as a list of characters (List[Char]).
   *
   * @author Sebastian.J.Herzig
   */
