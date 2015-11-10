@@ -21,31 +21,36 @@ object PascalsTriangle {
     // further, but is just for practice)
     def balanceIter(openingFunc: Char => Boolean,
                     closingFunc: Char => Boolean,
-                    currentIndex: Int): Int = {
-      // Not optimal:
-      //  - Scans entire string; should terminate if number of open parentheses
-      //    ever drops below 0
-      if (chars(currentIndex).equals("("))
-        balanceIter(openingFunc, closingFunc, currentIndex + 1) + 1
-      else if (chars(currentIndex).equals(")"))
-        balanceIter(openingFunc, closingFunc, currentIndex + 1) - 1
-      else 0
+                    currentIndex: Int,
+                    numOpen: Int): Int = {
+      if (currentIndex >= chars.length) numOpen     // End of string
+      else if (numOpen < 0) -1      // Opening parenthesis must precede closing
+      else if (openingFunc(chars(currentIndex)))    // Is opening parenthesis?
+        balanceIter(openingFunc, closingFunc, currentIndex + 1, numOpen + 1)
+      else if (closingFunc(chars(currentIndex)))    // Is closing parenthesis?
+        balanceIter(openingFunc, closingFunc, currentIndex + 1, numOpen - 1)
+      else balanceIter(openingFunc, closingFunc, currentIndex + 1, numOpen)
     }
     // Only balanced if result is 0
     balanceIter(isOpeningParenthesis,
                 isClosingParenthesis,
+                0,
                 0) == 0
   }
 
   /** For fun: comparator functions */
   def isOpeningParenthesis(char: Char): Boolean =
-    if (char.equals("(")) true else false
+    if (char.equals('(')) true else false
 
   def isClosingParenthesis(char: Char): Boolean =
-    if (char.equals(")")) true else false
+    if (char.equals(')')) true else false
 
   /** Test cases */
   balance("(if (zero? x) max (/ 1 x))".toList) == true
   balance("I told him (that it's not (yet) done). (But he wasn't listening)".toList) == true
+  balance(") not balanced".toList) == false
+  balance(") also not balanced (".toList) == false
+  balance(":-)".toList) == false
+  balance("())(".toList) == false
 
 }
