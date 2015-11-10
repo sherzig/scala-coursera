@@ -3,7 +3,7 @@
   *
   * @author Sebastian.J.Herzig
   */
-object PascalsTriangle {
+object ParenthesesBalancing {
 
   /** Function that verifies balancing of parentheses in a string. The input
     * string is represented by a list of characters.
