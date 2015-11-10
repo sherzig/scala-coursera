@@ -12,13 +12,30 @@ object ParenthesesBalancing {
     * @return TRUE if the parentheses are balanced, FALSE otherwise
     */
   def balance(chars: List[Char]): Boolean = {
-    // Returns the number of open / closed parentheses found by adding 1 to
-    // the result if an opening one was found, and subtracting one if a closing
-    // parenthesis was found
-    // For fun: define comparator for opening and closing brackets as anonymous
-    // functions (can then be replaced for balancing any type of character)
-    // (should ideally be defined further outside scope, could be generalized
-    // further, but is just for practice)
+
+    /** Returns the number of open / closed parentheses found by adding 1 to
+      * the result if an opening one was found, and subtracting one if a closing
+      * parenthesis was found.
+      *
+      * For fun: define comparator for opening and closing brackets as anonymous
+      * functions (can then be replaced for balancing any type of character)
+      * (should ideally be defined further outside scope, could be generalized
+      * further, but is just for practice).
+      *
+      * @param openingFunc Function that checks whether or not the given character
+      *                    represents an opening parenthesis / bracket
+      * @param closingFunc Function that checks whether or not the given character
+      *                    represents an opening parenthesis / bracket
+      * @param currentIndex The current index in the list of characters representing
+      *                     the input string
+      * @param numOpen The number of open parentheses / brackets
+      * @return The number of open / closed parentheses / brackets relative to
+      *         a starting value of 0. -1 is returned if, at any point, the number
+      *         of open / closed brackets relative to 0 drops to a negative value.
+      *         This is done so that a) the algorithm terminates more quickly on
+      *         average and b) to catch situations in which an opening bracket does
+      *         not precede a closing bracket (e.g., "())(")
+      */
     def balanceIter(openingFunc: Char => Boolean,
                     closingFunc: Char => Boolean,
                     currentIndex: Int,
@@ -31,7 +48,8 @@ object ParenthesesBalancing {
         balanceIter(openingFunc, closingFunc, currentIndex + 1, numOpen - 1)
       else balanceIter(openingFunc, closingFunc, currentIndex + 1, numOpen)
     }
-    // Only balanced if result is 0
+
+    /* Only balanced if result is 0 */
     balanceIter(isOpeningParenthesis,
                 isClosingParenthesis,
                 0,
