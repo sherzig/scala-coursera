@@ -12,7 +12,6 @@ object ParenthesesBalancing {
     * @return TRUE if the parentheses are balanced, FALSE otherwise
     */
   def balance(chars: List[Char]): Boolean = {
-
     /** Returns the number of open / closed parentheses found by adding 1 to
       * the result if an opening one was found, and subtracting one if a closing
       * parenthesis was found.
