@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+
 /** Algorithms that calculate the various ways in which change can
   * be given out given a list of coin denominations.
   *
@@ -74,22 +76,35 @@ object CountingChange {
       validCombinations
     }
 
-    // Only give change if there is change to give
-    if (money <= 0) 0 else countChangeIter(money, 0)
-  }
+    /** TESTING */
+    def loop(moneyLeft: Int, remCoins: List[Int]): Int = {
+      if (remCoins.isEmpty) 0
+      else if (moneyLeft - remCoins.head == 0) 1 + loop(moneyLeft, remCoins.tail)
+      else if (moneyLeft - remCoins.head > 0)
+        loop(moneyLeft - remCoins.head, remCoins) + loop(moneyLeft - remCoins.head, remCoins.tail)
+      else 0 //loop(moneyLeft, remCoins.tail)
+    }
 
+    def loop2(moneyLeft: Int, remCoins: List[Int]): Int = {
+      if (remCoins.isEmpty) 0
+      else loop(moneyLeft, remCoins) + loop2(moneyLeft, remCoins.tail)
+    }
+    loop2(money, coins)
+    /** END TESTING */
+
+    // Only give change if there is change to give
+    //if (money <= 0) 0 else countChangeIter(money, 0)
+  }
   /** Test cases */
-  countChange(4, List(1, 2)) == 3        // 2+2, 2+1+1, 1+1+1+1
-  countChange(6, List(1, 2)) == 4        // 2+2+2, 2+2+1+1, 2+1+1+1+1, 1+1+1+1+1+1
+  countChange(5, List(1, 2))
+  countChange(4, List(1, 2))// == 3        // 2+2, 2+1+1, 1+1+1+1
+  countChange(6, List(1, 2))// == 4        // 2+2+2, 2+2+1+1, 2+1+1+1+1, 1+1+1+1+1+1
   countChange(10,
-    List(1, 2, 5, 8, 10, 17, 43)) == 13  // 10, 8+2, 8+1+1, 5+5, 5+2+2+1, 5+2+1+1+1, 5+1+1+1+1+1,
+    List(1, 2, 5, 8, 10, 17, 43))  // 10, 8+2, 8+1+1, 5+5, 5+2+2+1, 5+2+1+1+1, 5+1+1+1+1+1,
                                          // 2+2+2+2+2, 2+2+2+2+1+1, 2+2+2+1+1+1+1, 2+2+1+1+1+1+1+1
                                          // 2+1+1+1+1+1+1+1+1, 1+1+1+1+1+1+1+1+1+1
-
   countChange(100,
-    List(1, 2, 5, 8, 10, 17, 43)) == 17522
-
+    List(1, 2, 5, 8, 10, 17, 43)) //== 17522
   countChange(0, List(1, 2, 10, 50)) == 0 // Corner case
   countChange(10, List(100, 200)) == 0    // Corner case
-
 }

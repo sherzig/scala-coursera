@@ -31,6 +31,7 @@ object PascalsTriangle {
     */
   def isValidEntry(c: Int, r: Int): Boolean =
     if (c > r || c < 0 || r < 0) false else true
+    // Or simply: !(c > r || c < 0 || r < 0)
 
   /** Test cases */
   pascal(0, 2)      // Should be 1
