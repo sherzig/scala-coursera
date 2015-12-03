@@ -89,12 +89,13 @@ object CountingChange {
       if (remCoins.isEmpty) 0
       else loop(moneyLeft, remCoins) + loop2(moneyLeft, remCoins.tail)
     }
-    loop2(money, coins)
+    //loop2(money, coins)
     /** END TESTING */
 
     // Only give change if there is change to give
-    //if (money <= 0) 0 else countChangeIter(money, 0)
+    if (money <= 0) 0 else countChangeIter(money, 0)
   }
+
   /** Test cases */
   countChange(5, List(1, 2))
   countChange(4, List(1, 2))// == 3        // 2+2, 2+1+1, 1+1+1+1
@@ -107,4 +108,11 @@ object CountingChange {
     List(1, 2, 5, 8, 10, 17, 43)) //== 17522
   countChange(0, List(1, 2, 10, 50)) == 0 // Corner case
   countChange(10, List(100, 200)) == 0    // Corner case
+
+  /** Official test cases */
+  countChange(4,List(1,2)) == 3
+  countChange(300,List(5,10,20,50,100,200,500)) == 1022
+  countChange(301,List(5,10,20,50,100,200,500)) == 0
+  countChange(300,List(500,5,50,100,20,200,10)) == 1022
+
 }
