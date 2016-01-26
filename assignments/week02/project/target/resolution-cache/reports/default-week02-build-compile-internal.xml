@@ -9,7 +9,7 @@
 		extra-sbtVersion="0.13"
 		conf="compile-internal"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
-		date="20151118090547"/>
+		date="20151202151928"/>
 	<dependencies>
 		<module organisation="ch.epfl.lamp" name="sbt-coursera">
 			<revision name="0.5" status="release" pubdate="20150413080856" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/sbt-coursera/sbt-coursera/" extra-scalaVersion="2.10" extra-sbtVersion="0.13" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="0">

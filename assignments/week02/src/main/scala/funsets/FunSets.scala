@@ -2,6 +2,8 @@ package funsets
 
 import common._
 
+import scala.annotation.tailrec
+
 /**
  * 2. Purely Functional Sets.
  */
@@ -69,13 +71,15 @@ object FunSets {
    * that satisfies `p`.
    */
   def exists(s: Set, p: Int => Boolean): Boolean = {
-    // Hmm... was supposed to use forAll...
-    def iter(a: Int): Boolean = {
-      if (contains(s, a)) true
-      else if (a > bound) false
-      else iter(a+1)
-    }
-    iter(-bound)
+    // Tyler's solution :-)
+    !forall(s, (x: Int) => !p(x))
+    /*
+    @tailrec
+    def iter(a: Int): Boolean =
+      if (a > bound) false
+      else forall(a => true, p) || iter(a + 1)
+
+    iter(-bound)*/
   }
   
   /**
