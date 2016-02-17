@@ -67,6 +67,8 @@ class BloxorzSuite extends FunSuite {
     new Level1 {
       println("**** DEBUG ****")
       println (pathsFromStart.toList mkString "\n")
+      println("\nSolution:")
+      println (solution mkString ", ")
       assert(solve(solution) == Block(goal, goal))
     }
   }
